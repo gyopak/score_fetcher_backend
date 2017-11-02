@@ -2,5 +2,6 @@ Flask
 gunicorn
 beautifulsoup4
 lxml
+git+git://github.com/niklasb/webkit-server.git
 xvfbwrapper
-dryscrape
+
