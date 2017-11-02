@@ -11,7 +11,7 @@ def generate(level, message):
 
 def save_log(log):
     with open("log.txt", "a") as log_file:
-        log_file.write(log + ",\n")
+        log_file.write(log + "\n")
 
 
 def log(message, level="INFO"):
