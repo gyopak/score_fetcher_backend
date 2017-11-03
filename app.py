@@ -18,7 +18,7 @@ def get_logs():
 @app.route("/teams", methods=["GET"])
 def get_raw_teams():
     teams = str(get_teams())
-    return json.dumps({'results': teams})
+    return str(len(teams))
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)

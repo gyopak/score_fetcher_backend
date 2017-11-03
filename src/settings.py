@@ -3,3 +3,6 @@ GAME_TYPE = "jegkorong/"
 
 TEAM_HTML_ATTRIBUTE = "span"
 TEAM_CLASS = "padl"
+
+
+SOUP_FORMAT =  "lxml"

@@ -1,4 +1,4 @@
-from src.settings import BASE_URL, GAME_TYPE, TEAM_HTML_ATTRIBUTE, TEAM_CLASS
+from src.settings import BASE_URL, GAME_TYPE, TEAM_HTML_ATTRIBUTE, TEAM_CLASS, SOUP_FORMAT
 from bs4 import BeautifulSoup
 import dryscrape
 import urllib
@@ -12,7 +12,7 @@ def get_page_data(url):
 def make_soup():
     session = dryscrape.Session()
     session.visit(BASE_URL + GAME_TYPE)
-    return BeautifulSoup(session.body())
+    return BeautifulSoup(session.body(), SOUP_FORMAT)
 
 
 def get_teams():
