@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 import json
-from src.logger import log, get_log_messages
-from src.fetcher import get_teams
+from logger import log, get_log_messages
+from src.fetcher import get_raw
 app = Flask(__name__)
 
 
@@ -15,10 +15,9 @@ def template_get_endpoint():
 def get_logs():
     return jsonify(get_log_messages())
 
-@app.route("/teams", methods=["GET"])
-def get_raw_teams():
-    teams = str(get_teams())
-    return str(len(teams))
+@app.route("/get", methods=["GET"])
+def get_raw_data():
+    return str(get_raw())
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)

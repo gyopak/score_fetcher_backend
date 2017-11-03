@@ -1,6 +1,0 @@
-Flask
-gunicorn
-beautifulsoup4
-lxml
-xvfbwrapper
-
