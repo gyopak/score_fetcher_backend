@@ -8,7 +8,7 @@ TEAM_HTML_ATTRIBUTE = "span"
 GROUP_HTML_ATTRIBUTE = "table"
 GROUP_COUNTY_CLASS = "country_part"
 GROUP_TOURNAMENT_CLASS = "tournament_part"
-TEAM_CLASS = "padl"
+TEAM_NAME_CLASS = "padl"
 
-
-
+HOME_SCORE_CLASS = "cell_sc score-home"
+AWAY_SCORE_CLASS = "cell_ta score-away"

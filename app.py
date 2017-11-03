@@ -17,7 +17,7 @@ def get_logs():
 
 @app.route("/get", methods=["GET"])
 def get_raw_data():
-    return str(get_raw())
+    return jsonify(get_raw())
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)

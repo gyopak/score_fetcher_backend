@@ -1,8 +1,5 @@
-from settings import TEAM_HTML_ATTRIBUTE, TEAM_CLASS
-from src.external.soup import make_soup
-
+from src.external.soup import get_matches
+import json
 
 def get_raw():
-    soup = make_soup()
-    
-    return soup.find_all(TEAM_HTML_ATTRIBUTE, {"class": TEAM_CLASS})
+    return get_matches()
