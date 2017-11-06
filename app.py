@@ -1,4 +1,4 @@
-from src.soup import get_matches, get_match
+from src.soup import get_matches, get_nested_info
 from flask import Flask, jsonify
 app = Flask(__name__)
 
@@ -10,13 +10,13 @@ def template_get_endpoint():
 
 @app.route("/get", methods=["GET"])
 def get_matches_raw():
-    return jsonify(get_matches())
+    return jsonify({"matches": get_matches()})
 
 
 @app.route("/get/<id>", methods=["GET"])
 def get_match_raw(id):
-    return jsonify(get_match(id))
+    return jsonify(get_nested_info(id))
 
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
+    app.run(host="0.0.0.0", port=6969, debug=True, use_reloader=True)
