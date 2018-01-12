@@ -3,6 +3,8 @@ GAME_URL = "jegkorong/"
 GAME_SESSION_NAME = "merkozes/"
 GAME_TYPE = "hockey"
 NESTED_GAME_URL = "/#egymas-elleni;overall"
+NESTED_HOME = "/#egymas-elleni;home"
+NESTED_AWAY = "/#egymas-elleni;away"
 
 
 SOUP_FORMAT =  "lxml"
