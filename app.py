@@ -1,7 +1,13 @@
 from src.soup import get_matches, get_nested_info
 from flask import Flask, jsonify
 app = Flask(__name__)
+import os
+import json
 
+
+def get_from_file(id):
+	os.sys("python3 src/soup.py " + str(id) )
+	return json.load(open("src.json"))
 
 @app.route('/', methods=['GET'])
 def template_get_endpoint():
@@ -15,7 +21,9 @@ def get_matches_raw():
 
 @app.route("/get/<id>", methods=["GET"])
 def get_match_raw(id):
-    return jsonify(get_nested_info(id))
+    return jsonify(get_from_file(id))
+
+
 
 
 if __name__ == '__main__':

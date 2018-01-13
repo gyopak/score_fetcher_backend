@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import dryscrape
 import json
 import copy
+import sys
 
 
 def make_soup(url):
@@ -59,7 +60,7 @@ def get_nested_info(id):
         data["away_last_matches"] = table_search("head_to_head h2h_home", raw)
         return data
     except:
-        return {"status": "failed"}
+        return {}
 
 
 def table_search(html_class_name, raw_soup):
@@ -74,3 +75,9 @@ def table_search(html_class_name, raw_soup):
                                           "away": match[3].text,
                                           "score": match[4].text})
     return previous_matches_data
+
+
+if __name__ == "__main__":
+    with open("src.json", "w") as file:
+        json.dump(get_nested_info(sys.argv[1]), file)
+
