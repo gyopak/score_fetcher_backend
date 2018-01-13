@@ -1,16 +1,19 @@
 from settings import *
 from bs4 import BeautifulSoup
+from xvfbwrapper import Xvfb
 import dryscrape
 import json
 import copy
 import sys
 
+vdisplay = Xvfb()
 
 def make_soup(url):
     dryscrape.start_xvfb()
     session = dryscrape.Session()
     session.visit(url)
     return BeautifulSoup(session.body(), SOUP_FORMAT)
+    
 
 
 def get_matches():
@@ -51,6 +54,7 @@ def get_all_match(home, away):
 
 
 def get_nested_info(id):
+    dryscrape.start_xvfb()
     data = {}
     raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_GAME_URL )
     try:
@@ -82,4 +86,3 @@ if __name__ == "__main__":
     dryscrape.start_xvfb()
     with open("src.json", "w") as file:
         json.dump(get_nested_info(sys.argv[1]), file)
-

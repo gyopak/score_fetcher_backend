@@ -6,8 +6,11 @@ import json
 
 
 def get_from_file(id):
-	os.system("sudo xvfb-run python3 src/soup.py " + str(id) )
-	return json.load(open("src.json"))
+    try:
+        os.system("python3 src/soup.py " + str(id) )
+    except:
+        pass
+    return json.load(open("src.json"))
 
 @app.route('/', methods=['GET'])
 def template_get_endpoint():
