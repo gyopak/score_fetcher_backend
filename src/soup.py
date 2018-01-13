@@ -7,6 +7,7 @@ import sys
 
 
 def make_soup(url):
+    dryscrape.start_xvfb()
     session = dryscrape.Session()
     session.visit(url)
     return BeautifulSoup(session.body(), SOUP_FORMAT)
@@ -78,6 +79,7 @@ def table_search(html_class_name, raw_soup):
 
 
 if __name__ == "__main__":
+    dryscrape.start_xvfb()
     with open("src.json", "w") as file:
         json.dump(get_nested_info(sys.argv[1]), file)
 

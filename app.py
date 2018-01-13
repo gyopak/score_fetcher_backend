@@ -6,7 +6,7 @@ import json
 
 
 def get_from_file(id):
-	os.sys("python3 src/soup.py " + str(id) )
+	os.system("sudo xvfb-run python3 src/soup.py " + str(id) )
 	return json.load(open("src.json"))
 
 @app.route('/', methods=['GET'])
