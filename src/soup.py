@@ -51,12 +51,15 @@ def get_all_match(home, away):
 def get_nested_info(id):
     data = {}
     raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_GAME_URL )
-    data["mutual_last_matches"] = table_search("head_to_head h2h_mutual", raw)
-    raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_HOME)
-    data["home_last_matches"] = table_search("head_to_head h2h_away", raw)
-    raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_AWAY)
-    data["away_last_matches"] = table_search("head_to_head h2h_home", raw)
-    return data
+    try:
+        data["mutual_last_matches"] = table_search("head_to_head h2h_mutual", raw)
+        raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_HOME)
+        data["home_last_matches"] = table_search("head_to_head h2h_away", raw)
+        raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_AWAY)
+        data["away_last_matches"] = table_search("head_to_head h2h_home", raw)
+        return data
+    except:
+        return {"status": "failed"}
 
 
 def table_search(html_class_name, raw_soup):
