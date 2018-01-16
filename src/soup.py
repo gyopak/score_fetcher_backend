@@ -6,10 +6,10 @@ import json
 import copy
 import sys
 
-vdisplay = Xvfb()
+#vdisplay = Xvfb()
 
 def make_soup(url):
-    dryscrape.start_xvfb()
+    #dryscrape.start_xvfb()
     session = dryscrape.Session()
     session.visit(url)
     return BeautifulSoup(session.body(), SOUP_FORMAT)
@@ -54,15 +54,14 @@ def get_all_match(home, away):
 
 
 def get_nested_info(id):
-    dryscrape.start_xvfb()
     data = {}
-    raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_GAME_URL )
     try:
+        raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_GAME_URL) 
         data["mutual_last_matches"] = table_search("head_to_head h2h_mutual", raw)
-        raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_HOME)
-        data["home_last_matches"] = table_search("head_to_head h2h_away", raw)
-        raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_AWAY)
-        data["away_last_matches"] = table_search("head_to_head h2h_home", raw)
+        raw1 = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_AWAY)
+        data["home_last_matches"] = table_search("head_to_head h2h_away", raw1)
+        raw2 = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_HOME)
+        data["away_last_matches"] = table_search("head_to_head h2h_home", raw2)
         return data
     except:
         return {}
@@ -83,6 +82,5 @@ def table_search(html_class_name, raw_soup):
 
 
 if __name__ == "__main__":
-    dryscrape.start_xvfb()
     with open("src.json", "w") as file:
         json.dump(get_nested_info(sys.argv[1]), file)

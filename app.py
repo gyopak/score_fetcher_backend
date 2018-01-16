@@ -3,7 +3,10 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 import os
 import json
+import dryscrape
 
+
+dryscrape.start_xvfb()
 
 def get_from_file(id):
     try:
