@@ -58,10 +58,10 @@ def get_nested_info(id):
     try:
         raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_GAME_URL) 
         data["mutual_last_matches"] = table_search("head_to_head h2h_mutual", raw)
-        raw1 = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_AWAY)
-        data["home_last_matches"] = table_search("head_to_head h2h_away", raw1)
-        raw2 = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_HOME)
-        data["away_last_matches"] = table_search("head_to_head h2h_home", raw2)
+        raw1 = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_HOME)
+        data["home_last_matches"] = table_search("head_to_head h2h_home", raw1)
+        raw2 = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_AWAY)
+        data["away_last_matches"] = table_search("head_to_head h2h_away", raw2)
         return data
     except:
         return {}
