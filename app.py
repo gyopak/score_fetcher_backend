@@ -27,10 +27,11 @@ def get_matches_raw():
 
 @app.route("/get/<id>", methods=["GET"])
 def get_match_raw(id):
+    #print(get_from_file(id))
     return jsonify(get_from_file(id))
 
 
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True, use_reloader=True)
+    app.run(host="0.0.0.0", port=5000)

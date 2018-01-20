@@ -5,6 +5,7 @@ import dryscrape
 import json
 import copy
 import sys
+from statistics import mode
 
 #vdisplay = Xvfb()
 
@@ -56,15 +57,29 @@ def get_all_match(home, away):
 def get_nested_info(id):
     data = {}
     try:
-        raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_GAME_URL) 
-        data["mutual_last_matches"] = table_search("head_to_head h2h_mutual", raw)
         raw1 = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_HOME)
-        data["home_last_matches"] = table_search("head_to_head h2h_home", raw1)
+        data["home_last_matches"], home_name = match_filter(table_search("head_to_head h2h_home", raw1), "home")
+        raw = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_GAME_URL) 
+        data["mutual_last_matches"] = mutual_filter(table_search("head_to_head h2h_mutual", raw), home_name)
         raw2 = make_soup(BASE_URL + GAME_SESSION_NAME + id + NESTED_AWAY)
-        data["away_last_matches"] = table_search("head_to_head h2h_away", raw2)
+        data["away_last_matches"], away_name = match_filter(table_search("head_to_head h2h_away", raw2), "away")
         return data
     except:
         return {}
+
+
+def mutual_filter(arr, home):
+    return [x for x in arr if x["home"] == home]
+
+
+def match_filter(arr, attr):
+    potential = []
+    potential.append(arr[0]["away"])
+    potential.append(arr[1]["away"])
+    potential.append(arr[0]["home"])
+    potential.append(arr[1]["home"])
+    name = mode(potential)
+    return [x for x in arr if x[attr] == name], name
 
 
 def table_search(html_class_name, raw_soup):
